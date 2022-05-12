@@ -15,3 +15,6 @@ sudo apt install pip
 python3 -m pip install -r requirements.txt
 python3 __init__.py 
 ```
+
+
+После запуска нажмите **Ctrl+M** для остановки искажателя восприятия информации.
