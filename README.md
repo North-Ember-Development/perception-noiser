@@ -8,6 +8,9 @@
 Запуск с платформы линукс очень простой.
 Запустите сперва **deploy.sh** для установки необходимых утилит. Установите **питон версии 3** и выше и запустите команду установки библиотек.
 
+###**Ubuntu**
 ```sh
+sudo apt install python3
+sudo apt install pip
 python3 -m pip install -r requirements.txt
 ```
