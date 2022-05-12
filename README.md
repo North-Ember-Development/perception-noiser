@@ -19,4 +19,4 @@ python3 __init__.py
 
 После запуска нажмите **Ctrl+M** для остановки искажателя восприятия информации.
 
-[Демонстрацио.](hhttps://www.youtube.com/watch?v=v-VHqa_JlVg)
+[Демонстрацио.](https://www.youtube.com/watch?v=v-VHqa_JlVg)
