@@ -14,5 +14,23 @@ def audio_noise_thread_executor():
     thread.data = data
     return thread
 
+def play_noise_1():
+    import numpy as np
+    import sounddevice as sd
+    import time, pyaudio
+
+    P = pyaudio.PyAudio()
+    sps, wm = 44100, .1
+    duration_s = 1.5
+    while True:
+        data =  np.random.uniform(-wm,wm,sps)
+        scaled = np.int16(data/np.max(np.abs(data)) * 767)
+        stream = P.open(rate=sps, format=pyaudio.paInt16, channels=1, output=True)
+        stream.write(scaled.tobytes())
+        stream.close()
+    P.terminate()
+
+    return sd
+
 if __name__ == "__main__":
-    audio_noise_thread_executor()
+    play_noise_1()
