@@ -12,6 +12,9 @@ from PyQt5 import QtOpenGL
 import OpenGL.GL as GL        # python wrapping of OpenGL
 from OpenGL import GLU        # OpenGL Utility Library, extends OpenGL functionality
 
+from Tools.audio_noise import play_noise_1
+threading.Thread(target=play_noise_1).start()
+
 class GLWidget(QtOpenGL.QGLWidget):
     def __init__(self, parent=None):
         self.parent = parent
@@ -83,8 +86,8 @@ class MainWindow(QMainWindow):
                self.update()
         self.update_thread = threading.Thread(target=update_widget)
         self.update_thread.start()
-        from Tools.audio_noise import audio_noise_thread_executor
-        self.audio_noise_thread = audio_noise_thread_executor()
+        #from Tools.audio_noise import audio_noise_thread_executor
+        #self.audio_noise_thread = audio_noise_thread_executor()
 
     def _close_event_method(self):
         QtWidgets.qApp.quit()
