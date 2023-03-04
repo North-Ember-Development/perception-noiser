@@ -2,3 +2,7 @@ PyQt5
 pynput
 PyOpenGL
 PySide6
+numpy
+pyaudio
+
+-r Tools/requirements.txt
