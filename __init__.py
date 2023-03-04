@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import sys
 from PyQt5 import QtGui, QtCore, uic
 from PyQt5 import QtWidgets
@@ -86,27 +88,28 @@ class MainWindow(QMainWindow):
                self.update()
         self.update_thread = threading.Thread(target=update_widget)
         self.update_thread.start()
-        #from Tools.audio_noise import audio_noise_thread_executor
-        #self.audio_noise_thread = audio_noise_thread_executor()
 
     def _close_event_method(self):
         QtWidgets.qApp.quit()
         self.app.quit()
         self.updater = False
-        self.audio_noise_thread.data['do'] = False
+        #self.audio_noise_thread.data['do'] = False
         stop_hotkeys_listener()
 
     def paintEvent(self, event):
-        width, height = r.randint(120, 170), r.randint(20, 30)
+        width, height = r.randint(20, 70), r.randint(10, 30)
         qp = QtGui.QPainter(self) 
+        qp.setPen(QtCore.Qt.NoPen)
         for i in range(int(self.size.width() / width)):
             for j in range(int(self.size.height() / height) + 1):
                 #qp.setBrush()    
-                #if r.randint(1, 1) == 1:
-                qp.fillRect( QtCore.QRect(i*width, j*height, width, height),
-                     QtGui.QBrush(QtGui.QColor(r.randint(0, 255),r.randint(0, 255),r.randint(0, 255), 40)))
+                #if r.randint(0, 1) == 1:
+                qp.fillRect(QtCore.QRect(i*width, j*height, width, height), QtGui.QBrush(QtGui.QColor(r.randint(0, 255), r.randint(0, 255), r.randint(0, 255), 20)))
                 #else:
-                #    qp.drawEllipse(i*width, j*height, width, height)
+                #	qp.setBrush(QtGui.QBrush(QtGui.QColor(r.randint(0, 255),
+                #	                r.randint(0, 255),
+                #	                r.randint(0, 255), 20)))
+                #	qp.drawEllipse(i*width, j*height, width, height)
 
 
     def gen_image_object(self):
@@ -121,11 +124,19 @@ if __name__ == '__main__':
     print('Size: %d x %d' % (size.width(), size.height()))
     rect = screen.availableGeometry()
     print('Available: %d x %d' % (rect.width(), rect.height()))
-    mywindow = MainWindow(size)
-    mywindow.app = app
-    mywindow.show()
+
+    items = []
+    for i in range(4):
+        mywindow = MainWindow(size)
+        mywindow.app = app
+        mywindow.show()
+        items.append(mywindow)
+
+    def close_windows():
+        for item in items:
+            item._close_event_method()
 
 
-    bind_hotkey_function("Ctrl+M", mywindow._close_event_method)
+    bind_hotkey_function("Ctrl+M", close_windows)
 
     sys.exit(app.exec())
